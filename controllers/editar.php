@@ -14,7 +14,6 @@ if(!$obPessoa instanceof Pessoa) {
     header('Location: /projeto_crud_API-CEP/CRUD-API-Viacep/index.php?status=error');
 }
 
-
 if(isset($_POST['nome'], $_POST['cpf'], $_POST['telefone'], $_POST['sexo'])) {
 
     $obEndereco = new Endereco();

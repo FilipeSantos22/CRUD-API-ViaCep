@@ -13,7 +13,6 @@ $obPessoa = new Pessoa();
 $obEndereco = new Endereco();
 $obEnderecoApi = new ViaCEP();
 
-
 if(isset($_POST['nome'], $_POST['cpf'], $_POST['telefone'], $_POST['sexo'], $_POST['cep'])) {
     
     $obEndereco = new Endereco();
@@ -24,23 +23,23 @@ if(isset($_POST['nome'], $_POST['cpf'], $_POST['telefone'], $_POST['sexo'], $_PO
     $obPessoa->setTelefone ($_POST['telefone']);
     $obPessoa->setCep ($_POST['cep']);
     $obPessoa->setSexo ($_POST['sexo']);
-  
     
-    $obPessoa->cadastrar();
     if(isset( $_POST['cep'])) {
-        
+        $resultado = ViaCEP::consultarCEP($_POST['cep']);        
         $cep = $_POST['cep'];
-        $resultado = ViaCEP::consultarCEP($cep);
-        // echo "<pre>"; print_r($_POST['cep']); echo "</pre>"; exit;
         
-        $obEndereco->setIdPessoa($obPessoa->getID());
         $obEndereco->setCep($resultado['cep']);
         $obEndereco->setLogradouro($resultado['logradouro']);
         $obEndereco->setBairro($resultado['bairro']);
         $obEndereco->setLocalidade($resultado['localidade']);
         $obEndereco->setUf($resultado['uf']);
-        $obEndereco->cadastrar();
-        echo "<pre>"; print_r($resultado['cep']); echo "</pre>"; exit;
+        
+        echo "<pre>"; print_r($obPessoa); echo "</pre>";
+        if (!$resultado['erro']){
+            $obPessoa->cadastrar();            
+            $obEndereco->setIdPessoa($obPessoa->getID());
+            $obEndereco->cadastrar();
+        } 
         header('Location: /projeto_crud_API-CEP/CRUD-API-Viacep/index.php?status=success');
         exit;   
     }else {
@@ -54,5 +53,4 @@ include __DIR__.'/../view/assets/css/style.php';
 include __DIR__.'/../view/header.php';
 include __DIR__.'/../view/form.php';
 include __DIR__.'/../view/footer.php';
-
 ?>

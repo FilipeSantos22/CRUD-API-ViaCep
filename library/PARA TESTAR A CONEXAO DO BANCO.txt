@@ -1,28 +1,27 @@
-include __DIR__. '/library/Connection.php';  // Certifique-se de incluir o arquivo da classe.
-
-// Cria uma instância da classe DataBase.
-$dataBase = new DataBase();
-
-// Chama o método testConnection para verificar a conexão.
-$dataBase->testConnection();
-
-
-DROP TABLE PESSOA;
-
-CREATE TABLE PESSOA (
-	ID SERIAL PRIMARY KEY,
-	NOME VARCHAR(255),
-	CPF VARCHAR (14),
-	TELEFONE VARCHAR (20), 
-	SEXO VARCHAR (20)
+CREATE TABLE IF NOT EXISTS public.pessoa
+(
+   	ID SERIAL PRIMARY KEY,
+    nome character varying(255) COLLATE pg_catalog."default",
+    cpf character varying(14) COLLATE pg_catalog."default",
+    telefone character varying(20) COLLATE pg_catalog."default",
+    sexo character varying(20) COLLATE pg_catalog."default",
+    cep character varying(50) COLLATE pg_catalog."default" NOT NULL DEFAULT '0'
 );
 
-SELECT * FROM PESSOA;
-
-
-INSERT INTO pessoa (NOME, CPF, TELEFONE, SEXO)
-	VALUES ('Filipe', 123.456.789-10, '(62) 99399-9607', 'masculino');
-
-
-DELETE FROM PESSOA
-WHERE ID  > 2;
+CREATE TABLE IF NOT EXISTS public.endereco
+(
+    idendereco serial NOT NULL PRIMARY KEY,
+    cep character varying(10) COLLATE pg_catalog."default" NOT NULL,
+    idpessoa integer,
+    logradouro character varying(255) COLLATE pg_catalog."default",
+    complemento character varying(255) COLLATE pg_catalog."default",
+    bairro character varying(100) COLLATE pg_catalog."default",
+    localidade character varying(100) COLLATE pg_catalog."default",
+    uf character varying(2) COLLATE pg_catalog."default",
+    ibge character varying(7) COLLATE pg_catalog."default",
+    gia character varying(10) COLLATE pg_catalog."default",
+    ddd character varying(2) COLLATE pg_catalog."default",
+    siafi character varying(10) COLLATE pg_catalog."default",
+    CONSTRAINT endereco_idpessoa_fkey FOREIGN KEY (idpessoa)
+        REFERENCES public.pessoa (id) MATCH SIMPLE
+);
