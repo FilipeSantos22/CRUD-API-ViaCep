@@ -1,6 +1,6 @@
 <?php
 
-class ViaCEP{
+include __DIR__.'/../../exceptions/ViaCepException.php';
 /**
  * Método responsável por consultar um CEP no ViaCEP.
  * 
@@ -8,51 +8,55 @@ class ViaCEP{
  * 
  * @param string $cep
  * return array
- * @throws Exception
  */
+class ViaCEP{
+
     public static function  consultarCEP ($cep){
 
-        // Remove caracteres não numéricos do CEP
         $cep = preg_replace('/[^0-9]/', '', $cep);
-
-        // Verifica se o CEP possui o formato correto
         if (strlen($cep) !== 8) {
             return false;
         }
-
-        //INICIA O CURL
+        
         $curl = curl_init();
-
-        //CONFIGURAÇÕES DO CURL
+        
         curl_setopt_array($curl, [
             CURLOPT_URL             => 'https://viacep.com.br/ws/'.$cep.'/json/',
             CURLOPT_RETURNTRANSFER  => true,
             CURLOPT_CUSTOMREQUEST   => 'GET'
         ]);
-
-        //RESPONSE
+        
         $response = curl_exec($curl);
-
-        //FECHA A CONEXÃO ABERTA
+        // file_get_contents($response);
+        
         curl_close($curl);
-
-        //CONVERTE JSON PARA ARRAY
+        
         $array = json_decode($response, true);
-
-        // Verifica se a consulta foi bem-sucedida
+        
         try {        
-            if (isset($array['erro']) || empty($array)) {
-                $mensagem = '<div class="alert text-center alert-danger">Ação não executada!</div>';
-                throw new Exception($mensagem.'adsfasdf');
+            if ($array['erro']) {
+                
+                throw new ViaCepException('Tente novamente.');
             }
-        } catch (Exception $e) {
-            $errorMessage = $e->getMessage();
-            header('Location: cadastrar.php?status=error');
+        } catch (ViaCepException $e) {
+            // echo "<pre>"; print_r( $e->cepNotFound()); echo "</pre>"; exit;
+            echo $e->cepNotFound();
+            
             exit;
         }
-         // Retorna os dados do CEP
-         return $array;
 
+        
+        
+        // try {
+        //     // Código que se conecta à API ViaCep
+        //     // Se houver um erro, lance a exceção
+        //     throw new ViaCepException("Mensagem de erro específica para a API ViaCep");
+        // } catch (ViaCepException $e) {
+        //     // Captura a exceção e trata conforme necessário
+        //     echo "Erro na API ViaCep: " . $e->getMessage();
+        // }
+
+         return $array;
     }
 }
 ?>

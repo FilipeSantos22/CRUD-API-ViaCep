@@ -6,7 +6,7 @@ include __DIR__.'/head.php';
 include __DIR__.'/assets/css/style.php';
 
 $resultadosEndereco = '';
-// Teste cada CEP e imprima os resultados
+
 foreach ($enderecos as $endereco) {
 
   $idPessoa = $endereco->getIdPessoa() ?: $endereco->idpessoa;

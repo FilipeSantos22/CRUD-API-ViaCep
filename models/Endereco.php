@@ -35,13 +35,13 @@ class Endereco {
         ]);     
         return $query;
     }
-    // MÉTODO RESPONSÁVEL POR OBTER AS VAGAS DO BANCO DE DADOS.
+   
     public static function getEnderecos($where = null, $order = null, $limit = 100) {
 
         return (new DataBase('ENDERECO'))->selectEndereco($where, $order, $limit)
                                     ->fetchAll(PDO::FETCH_CLASS, self::class);
     }
-// MÉTODO RESPONSÁVEL POR BUSCAR UMA VAGA BASEADA NO ID.
+
     public static function getEndereco($idendereco) {
             return (new DataBase('ENDERECO'))->selectEndereco('IDENDERECO = '.$idendereco)
                                         ->fetchObject((self::class));   

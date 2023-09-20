@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../models/Pessoa.php';
 require_once __DIR__ . '/../models/Endereco.php';
 require_once __DIR__ . '/../api/webService/ViaCep.php';
+require_once __DIR__ . '/../exceptions/ViaCepException.php';
 
 define('TITLE', 'MEU CLUD');
 
@@ -12,7 +13,7 @@ $obPessoa = new Pessoa();
 $obEndereco = new Endereco();
 $obEnderecoApi = new ViaCEP();
 
-//VALIDAÇÃO DO _POST
+
 if(isset($_POST['nome'], $_POST['cpf'], $_POST['telefone'], $_POST['sexo'], $_POST['cep'])) {
     
     $obEndereco = new Endereco();
@@ -23,14 +24,14 @@ if(isset($_POST['nome'], $_POST['cpf'], $_POST['telefone'], $_POST['sexo'], $_PO
     $obPessoa->setTelefone ($_POST['telefone']);
     $obPessoa->setCep ($_POST['cep']);
     $obPessoa->setSexo ($_POST['sexo']);
-    // $obEndereco->setCep($_POST['cep']);
+  
     
     $obPessoa->cadastrar();
-
     if(isset( $_POST['cep'])) {
         
         $cep = $_POST['cep'];
         $resultado = ViaCEP::consultarCEP($cep);
+        // echo "<pre>"; print_r($_POST['cep']); echo "</pre>"; exit;
         
         $obEndereco->setIdPessoa($obPessoa->getID());
         $obEndereco->setCep($resultado['cep']);
@@ -39,11 +40,12 @@ if(isset($_POST['nome'], $_POST['cpf'], $_POST['telefone'], $_POST['sexo'], $_PO
         $obEndereco->setLocalidade($resultado['localidade']);
         $obEndereco->setUf($resultado['uf']);
         $obEndereco->cadastrar();
-        // echo "<pre>"; print_r($obEndereco->getIdPessoa()); echo "</pre>"; exit;
-        header('Location: /projeto-crud/index.php?status=success');
+        echo "<pre>"; print_r($resultado['cep']); echo "</pre>"; exit;
+        header('Location: /projeto_crud_API-CEP/CRUD-API-Viacep/index.php?status=success');
         exit;   
     }else {
-        header('Location: /projeto-crud/index.php?error');
+        echo $e->cepNotFound();
+        header('Location: /projeto_crud_API-CEP/CRUD-API-Viacep/index.php?error');
     }
 }
 

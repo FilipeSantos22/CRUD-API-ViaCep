@@ -1,5 +1,5 @@
 <head>
-    <script src="/projeto-crud/view/assets/js/scripts.js"></script>
+    <script src="/projeto_crud_API-CEP/CRUD-API-Viacep/view/assets/js/scripts.js"></script>
 </head>
 
 </head>
@@ -43,7 +43,7 @@
               </div>
 
               <input src="/view/listagem.php" type="submit" class="btn btn-primary mr-3">        
-              <a href="/projeto-crud/index.php">
+              <a href="/projeto_crud_API-CEP/CRUD-API-Viacep/index.php">
                 <div class="btn btn-primary m3-3 ">Ver cadastros</div>
               </a>   
           </form>

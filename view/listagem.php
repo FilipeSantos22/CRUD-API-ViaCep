@@ -43,7 +43,7 @@
   <?=$mensagem?>
 
   <div class="text-center">
-    <a href="/projeto-crud/controllers/cadastrar.php">
+    <a href="/projeto_crud_API-CEP/CRUD-API-Viacep/controllers/cadastrar.php">
       <button class="btn btn-primary mt-3 ">Novo cadastro</button>
     </a>
     <h2 class="text-center mt-2">Pessoas cadastradas</h2>

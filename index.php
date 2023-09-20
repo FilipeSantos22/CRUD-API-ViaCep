@@ -1,6 +1,7 @@
 <?php
 include __DIR__.'/models/Pessoa.php';
 include_once __DIR__.'/models/Endereco.php';
+
 $pessoas = Pessoa::getPessoas();
 $enderecos = Endereco::getEnderecos();
 

@@ -6,15 +6,15 @@ define('TITLE', 'Editar Cadastro');
 $obPessoa = Pessoa::getPessoa($_GET['id']);
 
 if (!isset($_GET['id']) or !is_numeric($_GET['id'])) {
-    header('Location: /projeto-crud/index.php?status=error');
+    header('Location: /projeto_crud_API-CEP/CRUD-API-Viacep/index.php?status=error');
     exit;
 }
-//VALDAÇÃO DA VAGA
+
 if(!$obPessoa instanceof Pessoa) {
-    header('Location: /projeto-crud/index.php?status=error');
+    header('Location: /projeto_crud_API-CEP/CRUD-API-Viacep/index.php?status=error');
 }
 
-//VALIDAÇÃO DO _POST
+
 if(isset($_POST['nome'], $_POST['cpf'], $_POST['telefone'], $_POST['sexo'])) {
 
     $obEndereco = new Endereco();
@@ -36,9 +36,9 @@ if(isset($_POST['nome'], $_POST['cpf'], $_POST['telefone'], $_POST['sexo'])) {
         $obEndereco->setLocalidade ($resultado['localidade']);
         $obEndereco->setUf ($resultado['uf']);
         $obEndereco->atualizar();
-        // echo "<pre>"; print_r($obEndereco->getIdPessoa()); echo "</pre>"; exit;
+        
     }
-    header('Location: /projeto-crud/index.php?status=success');
+    header('Location: /projeto_crud_API-CEP/CRUD-API-Viacep/index.php?status=success');
     exit;
 }
 

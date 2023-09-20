@@ -7,9 +7,9 @@
         <header>
             <div class="navbar navbar-light bg-color">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="/projeto-crud/controllers/cadastrar.php">
+                    <a class="navbar-brand" href="/projeto_crud_API-CEP/CRUD-API-Viacep/controllers/cadastrar.php">
                     <img
-                        src="/projeto-crud/view/images/logo.png"
+                        src="/projeto_crud_API-CEP/CRUD-API-Viacep/view/images/logo.png"
                         class="me-2"
                         height="100"
                         width="210"

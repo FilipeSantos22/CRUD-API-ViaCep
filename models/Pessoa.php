@@ -25,7 +25,6 @@ class Pessoa {
                return true;    
         }
 
-
         public function atualizar () {
                 return (new DataBase('PESSOA'))->update('id = '.$this->id, [
                                         'NOME'        => $this->nome,
@@ -42,13 +41,13 @@ class Pessoa {
                 $query .= (new DataBase('PESSOA'))->delete('ID = '.$this->id);
             }
         
-        // MÉTODO RESPONSÁVEL POR OBTER AS VAGAS DO BANCO DE DADOS.
+       
         public static function getPessoas($where = null, $order = null, $limit = 100) {
                 return (new DataBase('pessoa'))->select($where, $order, $limit)
                                                ->fetchAll(PDO::FETCH_CLASS, self::class);
             }
 
-        // MÉTODO RESPONSÁVEL POR BUSCAR UMA VAGA BASEADA NO ID.
+    
         public static function getPessoa($id) {
                 return (new DataBase('pessoa'))->select('id = '.$id)
                                                ->fetchObject((self::class));

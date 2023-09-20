@@ -12,7 +12,7 @@
       width: 50%;
       height: 100%;
       margin: 0; 
-      background-image: url('/projeto-crud/view/images/arte-prog.png');
+      background-image: url('/projeto_crud_API-CEP/CRUD-API-Viacep/view/images/arte-prog.png');
       background-repeat: no-repeat;
       background-size: cover;
     }

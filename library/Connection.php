@@ -89,7 +89,7 @@ class DataBase {
         return $this->execute($query);
     }
 
-    // CRIEI ESSE MÉTODO PARA TESTAR SE A CONEXÃO DEU CERTO.
+    //testa conexão
     public function testConnection() {
         try {
             $this->connection->query('SELECT 1');

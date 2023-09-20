@@ -18,7 +18,7 @@ include __DIR__.'/head.php';
           <p class="text-light">Você realmente deseja excluir o cadastro: <strong><?=$obPessoa->getNome();?></strong> ?</p>
         </div>
         <div class="form-group">
-          <a href="/projeto-crud/index.php">
+          <a href="/projeto_crud_API-CEP/CRUD-API-Viacep/index.php">
           <input src="/view/listagem.php" value="Cancelar" type="button" class="btn btn-success mr-3"></input>
           </a>  
           <input src="/view/listagem.php" name="excluir" value="Excluir" type="submit" class="btn btn-danger mr-3"></input>
